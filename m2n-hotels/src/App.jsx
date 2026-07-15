@@ -1,31 +1,27 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import Discover from './components/Discover';
-import Welcome from './components/Welcome';
 import Footer from './components/Footer';
 import CustomCursor from './components/CustomCursor';
+import HomePage from './pages/HomePage';
+import RoomsPage from './pages/RoomsPage';
+import DiningPage from './pages/DiningPage';
+import LawnsPage from './pages/LawnsPage';
+import ContactPage from './pages/ContactPage';
 
 function App() {
-  const handleExploreClick = () => {
-    const discoverSection = document.getElementById('discover');
-    if (discoverSection) {
-      discoverSection.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   return (
-    <>
+    <BrowserRouter>
       <CustomCursor />
       <Navbar />
-      <main className="bg-background min-h-screen cursor-crosshair">
-        <Hero />
-        <div id="discover">
-          <Discover />
-        </div>
-        <Welcome onExplore={handleExploreClick} />
-        <Footer />
-      </main>
-    </>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/rooms" element={<RoomsPage />} />
+        <Route path="/dining" element={<DiningPage />} />
+        <Route path="/lawns" element={<LawnsPage />} />
+        <Route path="/contact" element={<ContactPage />} />
+      </Routes>
+      <Footer />
+    </BrowserRouter>
   );
 }
 

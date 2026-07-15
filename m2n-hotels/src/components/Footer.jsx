@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 export default function Footer() {
   return (
     <footer className="py-16 px-4 md:px-8 lg:px-16 bg-background border-t border-accent">
@@ -18,44 +20,44 @@ export default function Footer() {
             </h4>
             <ul className="space-y-2">
               <li>
-                <a
+                <Link
                   className="font-body text-muted text-sm hover:text-primary transition-colors"
-                  href="/"
+                  to="/"
                 >
                   Home
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   className="font-body text-muted text-sm hover:text-primary transition-colors"
-                  href="/rooms-suites"
+                  to="/rooms"
                 >
                   Rooms & Suites
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   className="font-body text-muted text-sm hover:text-primary transition-colors"
-                  href="/dining"
+                  to="/dining"
                 >
                   Dining
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   className="font-body text-muted text-sm hover:text-primary transition-colors"
-                  href="/lawns-banquet"
+                  to="/lawns"
                 >
                   Lawns & Banquet
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   className="font-body text-muted text-sm hover:text-primary transition-colors"
-                  href="/contact"
+                  to="/contact"
                 >
                   Contact
-                </a>
+                </Link>
               </li>
             </ul>
           </div>

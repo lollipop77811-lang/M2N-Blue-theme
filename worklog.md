@@ -26,3 +26,25 @@ Stage Summary:
 - All sections faithfully reproduced: Navbar, Hero, Discover, Welcome, Footer
 - Custom cursor, scroll-triggered navbar, grayscale hover effects all implemented
 - Project at /home/z/my-project/m2n-hotels/
+
+---
+Task ID: 2
+Agent: Main
+Task: Build all subpages (Rooms, Dining, Lawns, Contact)
+
+Work Log:
+- Discovered original site has 4 additional pages: /rooms, /dining, /lawns, /contact
+- Captured full HTML of each subpage using agent-browser
+- Built RoomsPage: filter sidebar (All/Suites/Deluxe/Standard), 5 room cards with details grid, sticky sidebar
+- Built DiningPage: 4 restaurant sections (Ember, Terrace, Sky Bar, Garden Café) with alternating layouts, gradient overlays, Private Dining CTA
+- Built LawnsPage: horizontal scroll venue cards (5 venues), snap scrolling, capacity grids, feature tags, Event Inquiry CTA
+- Built ContactPage: split layout (contact info left, map placeholder + form right), animated ping marker, contact form with subject dropdown
+- Set up React Router with BrowserRouter for all 5 routes
+- Updated Navbar and Footer to use React Router Link components with active state highlighting
+- Created HomePage component extracting home-specific sections from App
+- Final production build successful (30.7KB CSS, 268KB JS)
+
+Stage Summary:
+- All 5 pages fully implemented: Home, Rooms & Suites, Dining, Lawns & Banquet, Contact
+- React Router handles client-side navigation between all pages
+- Every page matches the original site's layout, content, and styling

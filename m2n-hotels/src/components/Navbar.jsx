@@ -1,21 +1,33 @@
 import { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 
 export default function Navbar() {
   const [visible, setVisible] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    setVisible(false);
+    setMenuOpen(false);
+  }, [location.pathname]);
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 80) {
-        setVisible(true);
-      } else {
-        setVisible(false);
-      }
+      setVisible(window.scrollY > 80);
     };
-
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const isActive = (path) => location.pathname === path;
+
+  const navLinks = [
+    { path: '/', label: 'HOME' },
+    { path: '/rooms', label: 'ROOMS & SUITES' },
+    { path: '/dining', label: 'DINING' },
+    { path: '/lawns', label: 'LAWNS & BANQUET' },
+    { path: '/contact', label: 'CONTACT' },
+  ];
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50">
@@ -27,50 +39,34 @@ export default function Navbar() {
         style={{ transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)' }}
       >
         <div className="max-w-7xl mx-auto px-8 h-20 flex items-center justify-between">
-          <a
+          <Link
             className="font-heading text-lg font-bold tracking-[8px] text-primary uppercase"
-            href="/"
+            to="/"
           >
             M2N
-          </a>
+          </Link>
 
           {/* Desktop nav links */}
           <div className="hidden md:flex items-center gap-12">
-            <a
-              className="font-heading text-xs font-semibold tracking-[4px] uppercase transition-colors duration-300 text-primary"
-              href="/"
-            >
-              HOME
-            </a>
-            <a
-              className="font-heading text-xs font-semibold tracking-[4px] uppercase transition-colors duration-300 text-muted hover:text-primary"
-              href="/rooms"
-            >
-              ROOMS & SUITES
-            </a>
-            <a
-              className="font-heading text-xs font-semibold tracking-[4px] uppercase transition-colors duration-300 text-muted hover:text-primary"
-              href="/dining"
-            >
-              DINING
-            </a>
-            <a
-              className="font-heading text-xs font-semibold tracking-[4px] uppercase transition-colors duration-300 text-muted hover:text-primary"
-              href="/lawns"
-            >
-              LAWNS & BANQUET
-            </a>
-            <a
-              className="font-heading text-xs font-semibold tracking-[4px] uppercase transition-colors duration-300 text-muted hover:text-primary"
-              href="/contact"
-            >
-              CONTACT
-            </a>
+            {navLinks.map((link) => (
+              <Link
+                key={link.path}
+                className={`font-heading text-xs font-semibold tracking-[4px] uppercase transition-colors duration-300 ${
+                  isActive(link.path) ? 'text-primary' : 'text-muted hover:text-primary'
+                }`}
+                to={link.path}
+              >
+                {link.label}
+              </Link>
+            ))}
           </div>
 
-          <button className="hidden md:block bg-primary text-background px-6 py-3 font-heading text-xs font-semibold tracking-[4px] uppercase hover:bg-surface transition-colors duration-300">
+          <Link
+            to="/rooms"
+            className="hidden md:block bg-primary text-background px-6 py-3 font-heading text-xs font-semibold tracking-[4px] uppercase hover:bg-surface transition-colors duration-300"
+          >
             BOOK NOW
-          </button>
+          </Link>
 
           {/* Mobile hamburger */}
           <button
@@ -102,24 +98,23 @@ export default function Navbar() {
           }`}
         >
           <div className="px-8 py-6 flex flex-col gap-4">
-            <a className="font-heading text-xs font-semibold tracking-[4px] uppercase text-primary" href="/">
-              HOME
-            </a>
-            <a className="font-heading text-xs font-semibold tracking-[4px] uppercase text-muted hover:text-primary transition-colors" href="/rooms">
-              ROOMS & SUITES
-            </a>
-            <a className="font-heading text-xs font-semibold tracking-[4px] uppercase text-muted hover:text-primary transition-colors" href="/dining">
-              DINING
-            </a>
-            <a className="font-heading text-xs font-semibold tracking-[4px] uppercase text-muted hover:text-primary transition-colors" href="/lawns">
-              LAWNS & BANQUET
-            </a>
-            <a className="font-heading text-xs font-semibold tracking-[4px] uppercase text-muted hover:text-primary transition-colors" href="/contact">
-              CONTACT
-            </a>
-            <button className="bg-primary text-background px-6 py-3 font-heading text-xs font-semibold tracking-[4px] uppercase hover:bg-surface transition-colors duration-300 w-fit">
+            {navLinks.map((link) => (
+              <Link
+                key={link.path}
+                className={`font-heading text-xs font-semibold tracking-[4px] uppercase transition-colors ${
+                  isActive(link.path) ? 'text-primary' : 'text-muted hover:text-primary'
+                }`}
+                to={link.path}
+              >
+                {link.label}
+              </Link>
+            ))}
+            <Link
+              to="/rooms"
+              className="bg-primary text-background px-6 py-3 font-heading text-xs font-semibold tracking-[4px] uppercase hover:bg-surface transition-colors duration-300 w-fit"
+            >
               BOOK NOW
-            </button>
+            </Link>
           </div>
         </div>
       </div>
