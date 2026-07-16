@@ -2,55 +2,65 @@ import { useRef } from 'react';
 
 const venues = [
   {
+    id: 1,
     name: 'Grand Ballroom',
     subtitle: 'Main Event Space',
     image: 'https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=1200&q=80',
     standing: '800',
     seated: '500',
+    banquet: '400',
     size: '1,200 sqm',
     description:
       'Our flagship venue features soaring 8-meter ceilings, state-of-the-art audiovisual systems, and a dedicated entrance. Perfect for grand celebrations and corporate galas.',
     tags: ['Pre-function Area', 'Private Bar', 'Stage', 'Dance Floor', 'AV System'],
   },
   {
+    id: 2,
     name: 'Crystal Garden',
     subtitle: 'Outdoor Venue',
     image: 'https://images.unsplash.com/photo-1464146072230-91cabc968266?w=1200&q=80',
     standing: '400',
     seated: '250',
+    banquet: '200',
     size: '800 sqm',
     description:
       'A stunning outdoor space surrounded by manicured gardens and illuminated by thousands of fairy lights. Ideal for weddings and al fresco celebrations.',
     tags: ['Garden Terrace', 'Tented Option', 'Lighting Rig', 'Dance Floor', 'Bar Station'],
   },
   {
+    id: 3,
     name: 'Skyline Terrace',
     subtitle: 'Rooftop Venue',
     image: 'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=1200&q=80',
     standing: '200',
     seated: '120',
+    banquet: '100',
     size: '400 sqm',
     description:
       'Perched on the 40th floor, this modern outdoor space offers unobstructed city views. Perfect for cocktail parties and corporate events with a view.',
     tags: ['City Views', 'Climate Control', 'Premium Bar', 'Lounge Area', 'Sound System'],
   },
   {
+    id: 4,
     name: 'Executive Boardroom',
     subtitle: 'Meeting Space',
     image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&q=80',
     standing: '30',
     seated: '20',
+    banquet: '0',
     size: '120 sqm',
     description:
       'An intimate meeting space with cutting-edge technology and bespoke catering. Perfect for board meetings, presentations, and strategic sessions.',
     tags: ['Video Conferencing', '4K Display', 'Catering Service', 'Private Entrance', 'Reception'],
   },
   {
+    id: 5,
     name: 'The Library',
     subtitle: 'Intimate Setting',
     image: 'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=1200&q=80',
     standing: '60',
     seated: '40',
+    banquet: '30',
     size: '180 sqm',
     description:
       'A sophisticated private dining room with floor-to-ceiling bookshelves and a roaring fireplace. Ideal for exclusive dinners and intimate gatherings.',
@@ -83,9 +93,9 @@ export default function LawnsPage() {
           ref={scrollRef}
           className="flex gap-[1px] overflow-x-auto overflow-y-hidden scroll-smooth snap-x snap-mandatory hide-scrollbar"
         >
-          {venues.map((venue, index) => (
+          {venues.map((venue) => (
             <div
-              key={index}
+              key={venue.id}
               className="flex-shrink-0 w-[85vw] lg:w-[80vw] h-[80vh] min-h-[600px] snap-center relative group"
             >
               <img
@@ -118,8 +128,8 @@ export default function LawnsPage() {
                         <p className="font-body text-xs text-muted tracking-[1px] uppercase">Seated</p>
                       </div>
                       <div>
-                        <p className="font-heading text-2xl text-primary">{venue.size}</p>
-                        <p className="font-body text-xs text-muted tracking-[1px] uppercase">Size</p>
+                        <p className="font-heading text-2xl text-primary">{venue.banquet}</p>
+                        <p className="font-body text-xs text-muted tracking-[1px] uppercase">Banquet</p>
                       </div>
                     </div>
                   </div>

@@ -7,6 +7,8 @@ export default function ContactPage() {
     subject: '',
     message: '',
   });
+  const [focusedField, setFocusedField] = useState(null);
+  const [submitted, setSubmitted] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -14,7 +16,12 @@ export default function ContactPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert('Message sent! (Demo)');
+    setSubmitted(true);
+  };
+
+  const handleReset = () => {
+    setSubmitted(false);
+    setFormData({ name: '', email: '', subject: '', message: '' });
   };
 
   return (
@@ -137,66 +144,103 @@ export default function ContactPage() {
           {/* Contact form */}
           <div className="flex-1 p-8 lg:p-16 flex items-center">
             <div className="w-full max-w-md">
-              <h2 className="font-heading text-2xl font-bold text-primary uppercase tracking-[4px] mb-8">
-                Send a Message
-              </h2>
-              <form onSubmit={handleSubmit} className="space-y-8">
-                <div>
-                  <input
-                    type="text"
-                    name="name"
-                    placeholder="Name"
-                    required
-                    value={formData.name}
-                    onChange={handleChange}
-                    className="w-full bg-transparent border-b-2 py-3 text-primary font-body placeholder:text-muted focus:outline-none focus:border-primary transition-colors border-muted"
-                  />
-                </div>
-                <div>
-                  <input
-                    type="email"
-                    name="email"
-                    placeholder="Email"
-                    required
-                    value={formData.email}
-                    onChange={handleChange}
-                    className="w-full bg-transparent border-b-2 py-3 text-primary font-body placeholder:text-muted focus:outline-none focus:border-primary transition-colors border-muted"
-                  />
-                </div>
-                <div>
-                  <select
-                    name="subject"
-                    required
-                    value={formData.subject}
-                    onChange={handleChange}
-                    className="w-full bg-transparent border-b-2 py-3 text-primary font-body focus:outline-none focus:border-primary transition-colors border-muted text-muted"
+              {submitted ? (
+                <div className="text-center py-12">
+                  <h3 className="font-heading text-3xl font-bold text-primary uppercase tracking-[4px] mb-4">
+                    THANK YOU
+                  </h3>
+                  <p className="font-body text-muted leading-relaxed">
+                    Your message has been received.
+                    <br />
+                    We will respond within 24 hours.
+                  </p>
+                  <button
+                    onClick={handleReset}
+                    className="mt-8 border border-primary text-primary px-8 py-3 font-heading text-xs font-semibold tracking-[4px] uppercase hover:bg-primary hover:text-background transition-all duration-300"
                   >
-                    <option value="">Subject</option>
-                    <option value="reservation">Room Reservation</option>
-                    <option value="dining">Dining Inquiry</option>
-                    <option value="event">Event Planning</option>
-                    <option value="feedback">Feedback</option>
-                    <option value="other">Other</option>
-                  </select>
+                    Send Another
+                  </button>
                 </div>
-                <div>
-                  <textarea
-                    name="message"
-                    placeholder="Message"
-                    required
-                    rows="4"
-                    value={formData.message}
-                    onChange={handleChange}
-                    className="w-full bg-transparent border-b-2 py-3 text-primary font-body placeholder:text-muted focus:outline-none focus:border-primary transition-colors resize-none border-muted"
-                  />
-                </div>
-                <button
-                  type="submit"
-                  className="w-full bg-primary text-background py-4 font-heading text-xs font-semibold tracking-[4px] uppercase hover:bg-surface transition-colors duration-300"
-                >
-                  Send Message
-                </button>
-              </form>
+              ) : (
+                <>
+                  <h2 className="font-heading text-2xl font-bold text-primary uppercase tracking-[4px] mb-8">
+                    Send a Message
+                  </h2>
+                  <form onSubmit={handleSubmit} className="space-y-8">
+                    <div>
+                      <input
+                        type="text"
+                        name="name"
+                        placeholder="Name"
+                        required
+                        value={formData.name}
+                        onChange={handleChange}
+                        onFocus={() => setFocusedField('name')}
+                        onBlur={() => setFocusedField(null)}
+                        className={`w-full bg-transparent border-b-2 py-3 text-primary font-body placeholder:text-muted focus:outline-none transition-colors ${
+                          focusedField === 'name' ? 'border-primary border-2' : 'border-muted'
+                        }`}
+                      />
+                    </div>
+                    <div>
+                      <input
+                        type="email"
+                        name="email"
+                        placeholder="Email"
+                        required
+                        value={formData.email}
+                        onChange={handleChange}
+                        onFocus={() => setFocusedField('email')}
+                        onBlur={() => setFocusedField(null)}
+                        className={`w-full bg-transparent border-b-2 py-3 text-primary font-body placeholder:text-muted focus:outline-none transition-colors ${
+                          focusedField === 'email' ? 'border-primary border-2' : 'border-muted'
+                        }`}
+                      />
+                    </div>
+                    <div>
+                      <select
+                        name="subject"
+                        required
+                        value={formData.subject}
+                        onChange={handleChange}
+                        onFocus={() => setFocusedField('subject')}
+                        onBlur={() => setFocusedField(null)}
+                        className={`w-full bg-transparent border-b-2 py-3 text-primary font-body focus:outline-none transition-colors ${
+                          focusedField === 'subject' ? 'border-primary border-2' : 'border-muted'
+                        } ${!formData.subject ? 'text-muted' : ''}`}
+                      >
+                        <option value="">Subject</option>
+                        <option value="reservation">Room Reservation</option>
+                        <option value="dining">Dining Inquiry</option>
+                        <option value="event">Event Planning</option>
+                        <option value="feedback">Feedback</option>
+                        <option value="other">Other</option>
+                      </select>
+                    </div>
+                    <div>
+                      <textarea
+                        name="message"
+                        placeholder="Message"
+                        required
+                        rows="4"
+                        value={formData.message}
+                        onChange={handleChange}
+                        onFocus={() => setFocusedField('message')}
+                        onBlur={() => setFocusedField(null)}
+                        className={`w-full bg-transparent border-b-2 py-3 text-primary font-body placeholder:text-muted focus:outline-none transition-colors resize-none ${
+                          focusedField === 'message' ? 'border-primary border-2' : 'border-muted'
+                        }`}
+                      />
+                    </div>
+                    <button
+                      type="submit"
+                      className="w-full bg-primary text-background py-4 font-heading text-xs font-semibold tracking-[4px] uppercase hover:bg-surface transition-colors duration-300"
+                    >
+                      Send Message
+                    </button>
+                  </form>
+                </>
+              )}
             </div>
           </div>
         </div>

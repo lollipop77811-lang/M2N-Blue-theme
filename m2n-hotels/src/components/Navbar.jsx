@@ -1,36 +1,31 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
+const navLinks = [
+  { path: '/', label: 'HOME' },
+  { path: '/rooms', label: 'ROOMS & SUITES' },
+  { path: '/dining', label: 'DINING' },
+  { path: '/lawns', label: 'LAWNS & BANQUET' },
+  { path: '/contact', label: 'CONTACT' },
+];
+
 export default function Navbar() {
   const [visible, setVisible] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
-    setVisible(false);
     setMenuOpen(false);
   }, [location.pathname]);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setVisible(window.scrollY > 80);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
   const isActive = (path) => location.pathname === path;
 
-  const navLinks = [
-    { path: '/', label: 'HOME' },
-    { path: '/rooms', label: 'ROOMS & SUITES' },
-    { path: '/dining', label: 'DINING' },
-    { path: '/lawns', label: 'LAWNS & BANQUET' },
-    { path: '/contact', label: 'CONTACT' },
-  ];
-
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50">
+    <nav
+      className="fixed top-0 left-0 right-0 z-50"
+      onMouseEnter={() => setVisible(true)}
+      onMouseLeave={() => setVisible(false)}
+    >
       <div className="h-20"></div>
       <div
         className={`fixed top-0 left-0 right-0 bg-glass backdrop-blur-md border-b border-accent transition-all duration-600 ease-smooth ${
