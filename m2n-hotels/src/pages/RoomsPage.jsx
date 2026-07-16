@@ -13,7 +13,7 @@ const rooms = [
     view: 'City Panoramic',
     bed: 'King',
     capacity: '2 Guests',
-    price: '1,200',
+    price: '99,600',
     image: 'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800&q=80',
     amenities: ['Marble Bathroom', 'Mini Bar', 'Workspace', 'Smart TV', 'Nespresso Machine', 'Walk-in Closet'],
     description: 'Experience unparalleled luxury in our Executive Slate Suite, featuring floor-to-ceiling windows with breathtaking city views.',
@@ -27,7 +27,7 @@ const rooms = [
     view: 'Garden Terrace',
     bed: 'King',
     capacity: '2 Guests',
-    price: '850',
+    price: '70,550',
     image: 'https://images.unsplash.com/photo-1590490360182-c33d57733427?w=800&q=80',
     amenities: ['Private Terrace', 'Rain Shower', 'Mini Bar', 'Smart TV', 'Work Desk'],
     description: 'A sophisticated retreat featuring a private terrace overlooking our manicured gardens.',
@@ -41,7 +41,7 @@ const rooms = [
     view: 'City',
     bed: 'Queen',
     capacity: '2 Guests',
-    price: '550',
+    price: '45,650',
     image: 'https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=800&q=80',
     amenities: ['Rain Shower', 'Smart TV', 'Work Desk', 'Safe'],
     description: 'Elegant simplicity meets modern comfort in our Classic Comfort rooms.',
@@ -55,7 +55,7 @@ const rooms = [
     view: '360° City View',
     bed: 'King',
     capacity: '4 Guests',
-    price: '3,500',
+    price: '2,90,500',
     image: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&q=80',
     amenities: ['Private Pool', 'Butler Service', 'Dining Room', 'Home Theater', 'Spa Bathroom', 'Wine Cellar'],
     description: 'The pinnacle of luxury accommodation, featuring private dining, butler service, and panoramic views.',
@@ -69,7 +69,7 @@ const rooms = [
     view: 'Ocean',
     bed: 'Twin / King',
     capacity: '2 Guests',
-    price: '750',
+    price: '62,250',
     image: 'https://images.unsplash.com/photo-1566665797739-1674de7a421a?w=800&q=80',
     amenities: ['Ocean View', 'Balcony', 'Rain Shower', 'Mini Bar', 'Smart TV'],
     description: 'Wake up to stunning ocean views in this beautifully appointed deluxe room.',
@@ -194,7 +194,7 @@ export default function RoomsPage() {
                         </div>
                         <div>
                           <p className="font-body text-xs text-muted tracking-[2px] uppercase">Price/Night</p>
-                          <p className="font-heading text-lg text-primary mt-1">${room.price}</p>
+                          <p className="font-heading text-lg text-primary mt-1">₹{room.price}</p>
                         </div>
                       </div>
 
